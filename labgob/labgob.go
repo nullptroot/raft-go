@@ -7,13 +7,15 @@ package labgob
 // about non-capitalized field names.
 //
 
-import "encoding/gob"
-import "io"
-import "reflect"
-import "fmt"
-import "sync"
-import "unicode"
-import "unicode/utf8"
+import (
+	"encoding/gob"
+	"fmt"
+	"io"
+	"reflect"
+	"sync"
+	"unicode"
+	"unicode/utf8"
+)
 
 var mu sync.Mutex
 var errorCount int // for TestCapital
@@ -112,13 +114,11 @@ func checkType(t reflect.Type) {
 	}
 }
 
-//
 // warn if the value contains non-default values,
 // as it would if one sent an RPC but the reply
 // struct was already modified. if the RPC reply
 // contains default values, GOB won't overwrite
 // the non-default value.
-//
 func checkDefault(value interface{}) {
 	if value == nil {
 		return
@@ -166,6 +166,12 @@ func checkDefault1(value reflect.Value, depth int, name string) {
 				// this warning typically arises if code re-uses the same RPC reply
 				// variable for multiple RPC calls, or if code restores persisted
 				// state into variable that already have non-default values.
+				/*
+
+					如果代码为多个 RPC 调用重复使用相同的 RPC 回复变量，
+					或者代码将持久状态恢复到已经具有非默认值的变量中，通常会出现此警告。
+
+				*/
 				fmt.Printf("labgob warning: Decoding into a non-default variable/field %v may not work\n",
 					what)
 			}
