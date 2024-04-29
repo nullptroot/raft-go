@@ -258,9 +258,9 @@ func (cfg *config) connect(i int) {
 // detach server i from the net.
 func (cfg *config) disconnect(i int) {
 	// fmt.Printf("disconnect(%d)\n", i)
-
+	// 连接状态变成否定
 	cfg.connected[i] = false
-
+	// 关闭向外传输的port
 	// outgoing ClientEnds
 	for j := 0; j < cfg.n; j++ {
 		if cfg.endnames[i] != nil {
@@ -268,7 +268,7 @@ func (cfg *config) disconnect(i int) {
 			cfg.net.Enable(endname, false)
 		}
 	}
-
+	// 关闭向内传输的port
 	// incoming ClientEnds
 	for j := 0; j < cfg.n; j++ {
 		if cfg.endnames[j] != nil {
