@@ -6,7 +6,8 @@ package labgob
 // outright crashes. so this wrapper around Go's encoding/gob warns
 // about non-capitalized field names.
 //
-
+// 相当于对encoding/gob的一个封装encoding/gob是二进制数据和具体对象的
+// 序列化和反序列化
 import (
 	"encoding/gob"
 	"fmt"

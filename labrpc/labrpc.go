@@ -48,7 +48,9 @@ package labrpc
 //   much like Go's rpcs.Register()
 //   pass svc to srv.AddService()
 //
-
+// 用一个channel来模拟网络的，各个raft调用call方法后
+// 都会将数据发送到Network中的channel中，Network会取出
+// 数据调用相应的方法，获取相应的数据通过channel传回
 import (
 	"bytes"
 	"labgob"
